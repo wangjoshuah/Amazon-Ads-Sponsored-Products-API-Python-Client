@@ -1937,6 +1937,13 @@ paths:
         schema:
           type: string
       responses:
+        200:
+          description: Success
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
         307:
           description: Successful operation.
           headers:
