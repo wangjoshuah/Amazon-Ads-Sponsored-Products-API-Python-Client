@@ -3,7 +3,7 @@ info:
   version: "2.0"
   title: Amazon Ads API - Sponsored Products
   description: |-
-    Use the Amazon Ads API for Sponsored Products for campaign, ad group, keyword, negative keyword, and product ad management operations. For more information about Sponsored Products, see the [Sponsored Products Support Center](https://advertising.amazon.com/help?entityId=ENTITY3CWETCZD9HEG2#GWGFKPEWVWG2CLUJ). For onboarding information, see the [account setup](setting-up/account-setup) topic.<br/><br/> 
+    Use the Amazon Ads API for Sponsored Products for campaign, ad group, keyword, negative keyword, and product ad management operations. For more information about Sponsored Products, see the [Sponsored Products Support Center](https://advertising.amazon.com/help?entityId=ENTITY3CWETCZD9HEG2#GWGFKPEWVWG2CLUJ). For onboarding information, see the [account setup](setting-up/account-setup) topic.<br/><br/>
   contact:
     name: Amazon Ads API Support
     url: https://amzn-clicks.atlassian.net/servicedesk/customer/portals
@@ -233,7 +233,7 @@ paths:
         - $ref: '#/components/parameters/clientHeader'
         - $ref: '#/components/parameters/profileHeader'
       requestBody:
-        description: An array of ad groups. 
+        description: An array of ad groups.
         content:
           application/json:
             schema:
@@ -584,7 +584,7 @@ paths:
       tags:
         - Keywords
       operationId: listKeywordsEx
-      summary: Gets a list of keywords that have extended data fields. 
+      summary: Gets a list of keywords that have extended data fields.
       parameters:
         - $ref: '#/components/parameters/clientHeader'
         - $ref: '#/components/parameters/profileHeader'
@@ -1163,7 +1163,7 @@ paths:
       tags:
         - Suggested keywords
       operationId: bulkGetAsinSuggestedKeywords
-      summary: Gets suggested keyword for a specified list of ASINs. 
+      summary: Gets suggested keyword for a specified list of ASINs.
       description: Suggested keywords are returned in an array ordered by descending effectiveness.
       parameters:
         - $ref: '#/components/parameters/clientHeader'
@@ -1375,7 +1375,7 @@ paths:
       operationId: getBidRecommendations
       summary: Gets a list of bid recommendations for keyword, product, or auto targeting expressions.
       requestBody:
-        description: An ad group identifier and list of associated targeting expressions for which to generate bid recommendations. Note that targeting expressions are required to be of the same type. That is, all targeting expressions in the list must be one of **keyword**, **product**, or **auto** target types. 
+        description: An ad group identifier and list of associated targeting expressions for which to generate bid recommendations. Note that targeting expressions are required to be of the same type. That is, all targeting expressions in the list must be one of **keyword**, **product**, or **auto** target types.
         content:
           application/json:
             schema:
@@ -1824,7 +1824,7 @@ paths:
         - Reports
       operationId: requestReport
       summary: Requests a Sponsored Products report.
-      description: |- 
+      description: |-
         Request the creation of a performance report for all entities of a single type which have performance data to report. Record types can be one of `campaigns`, `adGroups`, `keywords`, `productAds`, `asins`, and `targets`. **Note** that for `asin` reports, the report currently can **not** include metrics associated with both keywords and targets. If the `targetingId` value is set in the request, the report filters on targets and does not return sales associated with keywords. If the `targetingId` value is **not** set in the request, the report filters on keywords and does not return sales associated with targets. Therefore, the default behavior filters the report on keywords. Also note that if both `keywordId` **and** `targetingId` values are passed, the report filters on targets only and does **not** return keywords.
       parameters:
         - $ref: '#/components/parameters/clientHeader'
@@ -1854,7 +1854,7 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: 
+                properties:
                   reportId:
                     type: string
                     description: The unique ID for your requested report.
@@ -1863,7 +1863,7 @@ paths:
                     description: The record type of the report. It can be `campaign`, `adGroup`, `keyword`, `productAd`, or `targets`.
                   status:
                     type: string
-                    description: The status of the report. Status is one of `IN_PROGRESS`, `SUCCESS`, or `FAILURE`. 
+                    description: The status of the report. Status is one of `IN_PROGRESS`, `SUCCESS`, or `FAILURE`.
                   statusDetails:
                     type: string
                     description: Description of the status.
@@ -1887,7 +1887,7 @@ paths:
           required: true
           description: The report identifier.
           schema:
-            type: number
+            type: string
       responses:
         200:
           description: Success.
@@ -1895,13 +1895,13 @@ paths:
             application/json:
               schema:
                 type: object
-                properties: 
+                properties:
                   reportId:
                     type: string
                     description: The unique ID for your requested report.
                   status:
                     type: string
-                    description: The status of the report. Status is one of `IN_PROGRESS`, `SUCCESS`, or `FAILURE`. 
+                    description: The status of the report. Status is one of `IN_PROGRESS`, `SUCCESS`, or `FAILURE`.
                   statusDetails:
                     type: string
                     description: Description of the status.
@@ -1915,14 +1915,14 @@ paths:
       - Reports
       summary: Downloads a previously requested report identified by report ID.
       description: |-
-                    Gets a `307 Temporary Redirect` response that includes a `location` header with the value set to an AWS S3 path where the report is located. The path expires after 30 seconds. If the path expires before the report is downloaded, a new report request must be created. 
-                    
+                    Gets a `307 Temporary Redirect` response that includes a `location` header with the value set to an AWS S3 path where the report is located. The path expires after 30 seconds. If the path expires before the report is downloaded, a new report request must be created.
+
                     The report file contains one row per entity for which performance data is present. These records are represented as JSON containing the ID attribute corresponding to the `recordType`, the segment (if specified), and each of the metrics in the request.
 
                     **Note**: The report files in S3 are gzipped.
-                    
+
                     *Example report download*
-                    
+
                     ```
                     $ curl -o /tmp/report.json.gz "https://sandboxreports.s3.amazonaws.com/amzn1.clicksAPI.v1.m1.xxxxxxx.xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxx?AWSAccessKeyId=XXXXXXXXXXXXXXX&amp;Expires=1476479900&amp;Signature=xxxxxxxxxxxxxxxxxxxx"
                     ```
@@ -2103,16 +2103,16 @@ components:
       required: false
       schema:
         type: string
-    clientHeader:    
+    clientHeader:
       name: Amazon-Advertising-API-ClientId
       in: header
-      description: The identifier of a client associated with a "Login with Amazon" developer account. 
+      description: The identifier of a client associated with a "Login with Amazon" developer account.
       required: true
       schema:
         type: string
-    count: 
+    count:
       name: count
-      in: query 
+      in: query
       description: Number of records to include in the paged response. Defaults to max page size.
       required: false
       schema:
@@ -2149,7 +2149,7 @@ components:
           - exact
     maxNumSuggestions:
       name: maxNumSuggestions
-      in: query 
+      in: query
       description: The maxiumum number of suggested keywords for the response.
       schema:
         type: integer
@@ -2157,11 +2157,11 @@ components:
         minimum: 1
         maximum: 1000
     name:
-      name: name 
-      in: query 
-      description: Restricts results to campaigns with the specified name. 
+      name: name
+      in: query
+      description: Restricts results to campaigns with the specified name.
       required: false
-      schema: 
+      schema:
         type: string
     negativeAdGroupIdFilter:
       name: adGroupIdFilter
@@ -2216,13 +2216,13 @@ components:
       required: false
       schema:
         type: string
-    profileHeader:      
+    profileHeader:
       name: Amazon-Advertising-API-Scope
       in: header
       description: The identifier of a profile associated with the advertiser account. Use `GET` method on Profiles resource to list profiles associated with the access token passed in the HTTP Authorization header.
       required: true
       schema:
-        type: string    
+        type: string
     startIndex:
       name: startIndex
       in: query
@@ -2239,7 +2239,7 @@ components:
         type: string
         enum:
           - "enabled"
-          - "paused" 
+          - "paused"
           - "archived"
           - "enabled, paused"
           - "enabled, archived"
@@ -2265,7 +2265,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotAcceptable:            
+    NotAcceptable:
       description: One or more values specified for a parameter was not within the specified acceptable range.
       content:
         application/json:
@@ -2282,19 +2282,19 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error' 
+            $ref: '#/components/schemas/Error'
     InvalidQueryParam:
       description: One or more query parameters contained an invalid value.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error' 
+            $ref: '#/components/schemas/Error'
     ResourceNotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'                        
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized.
       content:
@@ -2305,14 +2305,14 @@ components:
     AdGroup:
       properties:
         adGroupId:
-          description: The identifier of the ad group. 
-          type: number 
-        name: 
-          description: The name of the ad group. 
-          type: string 
-        campaignId: 
+          description: The identifier of the ad group.
+          type: number
+        name:
+          description: The name of the ad group.
+          type: string
+        campaignId:
           description: The identifier of the campaign that the ad group is associated with.
-          type: number 
+          type: number
         defaultBid:
           description: The bid value used when no bid is specified for keywords in the ad group.
           type: number
@@ -2322,17 +2322,17 @@ components:
     AdGroupEx:
       properties:
         adGroupId:
-          description: The identifier of the ad group. 
-          type: number 
-        name: 
-          description: The name of the ad group. 
-          type: string 
-        campaignId: 
+          description: The identifier of the ad group.
+          type: number
+        name:
+          description: The name of the ad group.
+          type: string
+        campaignId:
           description: The identifier of the campaign that the ad group is associated with.
-          type: number 
+          type: number
         defaultBid:
           description: The bid value used when no bid is specified for keywords in the ad group.
-          type: number 
+          type: number
         state:
           $ref: '#/components/schemas/State'
         creationDate:
@@ -2365,7 +2365,7 @@ components:
           description: An enumerated success or error code for machine use.
           type: string
         details:
-          description: A human-readable description of the code. 
+          description: A human-readable description of the code.
           type: string
         description:
           description: A human-readable description of the code.
@@ -2402,7 +2402,7 @@ components:
           $ref: '#/components/schemas/MatchType'
         state:
           description: The state of the ad for which the keyword is suggested.
-          type: string 
+          type: string
           enum:
             - enabled
             - paused
@@ -2462,7 +2462,7 @@ components:
                   description: The bid adjustment percentage value.
     BidRecommendationsResponse:
       properties:
-        adGroupId: 
+        adGroupId:
           description: The identifier of the ad group that the recommendations are associated with.
           type: string
         recommendations:
@@ -2526,9 +2526,9 @@ components:
     CreateAdGroup:
       properties:
         name:
-          description: A name for the ad group. 
+          description: A name for the ad group.
           type: string
-        campaignId: 
+        campaignId:
           description: An existing campaign to which the ad group is associated.
           type: number
         defaultBid:
@@ -2555,7 +2555,7 @@ components:
     CampaignTags:
       description: A list of advertiser-specified custom identifiers for the campaign. Each customer identifier is a key-value pair. You can specify a maximum of 50 identifiers.
       type: object
-      additionalProperties: 
+      additionalProperties:
         type: string
       example:
         PONumber: examplePONumber
@@ -2582,11 +2582,11 @@ components:
           type: string
           enum:
             - manual
-            - auto 
+            - auto
         state:
           $ref: '#/components/schemas/State'
         dailyBudget:
-          description: A daily budget for the campaign. 
+          description: A daily budget for the campaign.
           type: number
           format: float
         startDate:
@@ -2624,11 +2624,11 @@ components:
           type: string
           enum:
             - manual
-            - auto 
+            - auto
         state:
           $ref: '#/components/schemas/State'
         dailyBudget:
-          description: The daily budget of the campaign. 
+          description: The daily budget of the campaign.
           type: number
           format: float
           minimum: 1.00
@@ -2666,11 +2666,11 @@ components:
           type: string
           enum:
             - manual
-            - auto 
+            - auto
         state:
           $ref: '#/components/schemas/State'
         dailyBudget:
-          description: The daily budget of the campaign. 
+          description: The daily budget of the campaign.
           type: number
           format: float
           minimum: 1.00
@@ -2687,7 +2687,7 @@ components:
           $ref: '#/components/schemas/Bidding'
         creationDate:
           description: The creation date of the campaign, in epoch time.
-          type: number 
+          type: number
         lastUpdatedDate:
           description: The date that any value associated with the campaign was last changed, in epoch time.
           type: number
@@ -2781,7 +2781,7 @@ components:
       properties:
         keywordId:
           description: The identifier of the campaign negative keyword.
-          type: number 
+          type: number
         code:
           description: An enumerated success or error code for machine use.
           type: string
@@ -2795,7 +2795,7 @@ components:
       properties:
         campaignId:
           description: The identifier of the campaign.
-          type: number 
+          type: number
         code:
           description: An enumerated success or error code for machine use.
           type: string
@@ -2860,7 +2860,7 @@ components:
           description: The identifer of the campaign to which the keyword is associated.
           type: number
         adGroupId:
-          description: The identifier of the ad group to which this keyword is associated. 
+          description: The identifier of the ad group to which this keyword is associated.
           type: number
         state:
           $ref: '#/components/schemas/State'
@@ -2927,7 +2927,7 @@ components:
           description: The identifer of the campaign to which the keyword is associated.
           type: number
         adGroupId:
-          description: The identifier of the ad group to which this keyword is associated. 
+          description: The identifier of the ad group to which this keyword is associated.
           type: number
         state:
           $ref: '#/components/schemas/State'
@@ -3003,7 +3003,7 @@ components:
                 description: The keyword text.
                 type: string
               matchType:
-                $ref: '#/components/schemas/MatchType'          
+                $ref: '#/components/schemas/MatchType'
             minItems: 0
             maxItems: 5000
     KeywordResponse:
@@ -3042,7 +3042,7 @@ components:
           description: The identifer of the campaign to which the negative keyword is associated.
           type: number
         adGroupId:
-          description: The identifier of the ad group to which the negative keyword is associated. 
+          description: The identifier of the ad group to which the negative keyword is associated.
           type: number
         state:
           $ref: '#/components/schemas/State'
@@ -3060,7 +3060,7 @@ components:
           description: The identifer of the campaign to which the keyword is associated.
           type: number
         adGroupId:
-          description: The identifier of the ad group to which this keyword is associated. 
+          description: The identifier of the ad group to which this keyword is associated.
           type: number
         state:
           $ref: '#/components/schemas/State'
@@ -3128,7 +3128,7 @@ components:
           type: string
     NegativeTargetingClauseResponse:
       properties:
-        targetId: 
+        targetId:
           description: The negative target identifier.
           type: number
         code:
@@ -3244,7 +3244,7 @@ components:
             - PENDING_START_DATE
     ProductAd:
       properties:
-        adId: 
+        adId:
           description: The product ad identifier.
           type: number
         campaignId:
@@ -3286,7 +3286,7 @@ components:
           $ref: '#/components/schemas/State'
     ProductAdEx:
       properties:
-        adId: 
+        adId:
           description: The product ad identifier.
           type: number
         campaignId:
@@ -3331,18 +3331,18 @@ components:
           items:
             type: object
             properties:
-              name: 
+              name:
                 type: string
                 description: The status identifier.
-              severity: 
+              severity:
                 type: string
-                description: An enumerated advertising eligibility severity status. If set to `INELIGIBLE`, the product cannot be included in an advertisement. If set to `ELIGIBLE_WITH_WARNING`, the product may not receive impressions when included in an advertisement. 
+                description: An enumerated advertising eligibility severity status. If set to `INELIGIBLE`, the product cannot be included in an advertisement. If set to `ELIGIBLE_WITH_WARNING`, the product may not receive impressions when included in an advertisement.
               message:
                 type: string
                 description: A human-readable description of the status identifier specified in the `name` field.
               helpUrl:
                 type: string
-                description: A URL with additional information about the status identifier. May not be present for all status identifiers.            
+                description: A URL with additional information about the status identifier. May not be present for all status identifiers.
     ProductRecommendationsResponse:
       properties:
         totalResultCount:
@@ -3375,7 +3375,7 @@ components:
                 type: string
     ReportMetrics:
       description: |-
-        A comma-separated list of the metrics to be included in the report. 
+        A comma-separated list of the metrics to be included in the report.
         The following tables summarize report metrics which can be requested via the reports interface. Different report types can use different metrics.
         Note that ASIN reports only return data for either keywords or targets, but not both.
         |Report Type | Metric | Details |
@@ -3450,8 +3450,8 @@ components:
         | adGroups | `attributedUnitsOrdered14dSameSKU` | Number of attributed units ordered within 14 days of click on ad where the purchased SKU was the same as the one advertised. |
         | adGroups | `attributedUnitsOrdered30dSameSKU` | Number of attributed units ordered within 30 days of click on ad where the purchased SKU was the same as the one advertised. |
         | adGroups | `attributedKindleEditionNormalizedPagesRead14d` | Number of attributed kindle edition normalized pages read within 14 days of click on ad. |
-        | adGroups | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|        
-        |           |              |              | 
+        | adGroups | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|
+        |           |              |              |
         | keywords | `campaignName` | Unique name of the campaign |
         | keywords | `campaignId` | Unique numerical ID of the campaign |
         | keywords | `adGroupName` | Unique name of the ad group |
@@ -3487,8 +3487,8 @@ components:
         | keywords | `attributedUnitsOrdered14dSameSKU` | Number of attributed units ordered within 14 day of click on ad where the purchased SKU was the same as the one advertised. |
         | keywords | `attributedUnitsOrdered30dSameSKU` | Number of attributed units ordered within 30 day of click on ad where the purchased SKU was the same as the one advertised. |
         | keywords | `attributedKindleEditionNormalizedPagesRead14d` | Number of attributed kindle edition normalized pages read within 14 days of click on ad. |
-        | keywords | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|        
-        |                |             |               | 
+        | keywords | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|
+        |                |             |               |
         | productAds | `campaignName` | Unique name of the campaign |
         | productAds | `campaignId` | Unique numerical ID of the campaign |
         | productAds | `adGroupName` | Unique name of the ad group |
@@ -3524,7 +3524,7 @@ components:
         | productAds | `attributedUnitsOrdered14dSameSKU` | Number of attributed units ordered within 14 days of click on ad where the purchased SKU was the same as the one advertised. |
         | productAds | `attributedUnitsOrdered30dSameSKU` | Number of attributed units ordered within 30 days of click on ad where the purchased SKU was the same as the one advertised. |
         | productAds | `attributedKindleEditionNormalizedPagesRead14d` | Number of attributed kindle edition normalized pages read within 14 days of click on ad. |
-        | productAds | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|        
+        | productAds | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|
         |              |               |              |
         | asins | `campaignName` | Unique name of the campaign |
         | asins | `campaignId` | Unique numerical ID of the campaign |
@@ -3553,7 +3553,7 @@ components:
         | asins | `targetingText` | The targeting text. |
         | asins | `targetingType` | The targeting type. |
         | asins | `attributedKindleEditionNormalizedPagesRead14d` | Number of attributed kindle edition normalized pages read within 14 days of click on ad. |
-        | asins | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|        
+        | asins | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|
         |                      |              |              |
         | targets | `campaignName` | Unique name of the campaign |
         | targets | `campaignId` | Unique numerical ID of the campaign |
@@ -3591,14 +3591,14 @@ components:
         | targets | `attributedUnitsOrdered14dSameSKU` | Number of attributed units ordered within 14 days of click on ad where the purchased SKU was the same as the one advertised. |
         | targets | `attributedUnitsOrdered30dSameSKU` | Number of attributed units ordered within 30 days of click on ad where the purchased SKU was the same as the one advertised. |
         | targets | `attributedKindleEditionNormalizedPagesRead14d` | Number of attributed kindle edition normalized pages read within 14 days of click on ad. |
-        | targets | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|        
-      type: string    
+        | targets | `attributedKindleEditionNormalizedPagesRoyalties14d` | The estimated Royalties of attributed estimated kindle edition normalized pages with in 14 days of click on ad.|
+      type: string
     Report:
       properties:
         stateFilter:
           type: string
-          description: |- 
-            Filters the response to include reports with `stateFilter` set to one of the values in the comma-delimited list. `stateFilter` and `segment` cannot be used in the same report request. 
+          description: |-
+            Filters the response to include reports with `stateFilter` set to one of the values in the comma-delimited list. `stateFilter` and `segment` cannot be used in the same report request.
             `asins` report types do not support the use of `stateFilter`.
           enum:
             - enabled
@@ -3614,16 +3614,16 @@ components:
         segment:
           description: |-
             A secondary dimension used to further segment certain types of reports. `stateFilter` and `segment` cannot be used in the same report request. Keyword search term reports only return search terms that have generated at least one click or sale.
-            
-            **Note**: Search term reports for auto-targeted campaigns created before 11/14/2018 can be accessed from the `/v2/sp/keywords/report` resource. Search term reports for auto-targeted campaigns generated on-and-after 11/14/2018 can be accessed from the `/v2/sp/targets/report` resource. 
-          
+
+            **Note**: Search term reports for auto-targeted campaigns created before 11/14/2018 can be accessed from the `/v2/sp/keywords/report` resource. Search term reports for auto-targeted campaigns generated on-and-after 11/14/2018 can be accessed from the `/v2/sp/targets/report` resource.
+
             | Dimension | Valid report types | Description |
             |-----------|-------------|-------------|
             | query | keywords, targets | Segments a report based on customer search term. |
             | placement | campaigns | Segments a `campaigns` report based on the page location where the ad appeared. |
           type: string
           enum:
-            - query 
+            - query
             - placement
         reportDate:
           description: The date for which to retrieve the performance report in YYYYMMDD format. The time zone is specified by the profile used to request the report. If this date is today, then the performance report may contain partial information. Reports are not available for data older than 60 days. For details on data latency, see the Service Guarantees in the [developer notes](https://advertising.amazon.com/API/docs/en-us/get-started/developer-notes) section.
@@ -3729,7 +3729,7 @@ components:
              The type of targeting expression. You can specify values for the following predicates:
              | Predicate | Description |
              | --- | --- |
-             | `queryBroadMatches` | 
+             | `queryBroadMatches` |
              | `asinCategorySameAs` | Negatively Target the same category as the category expressed. |
              | `asinBrandSameAs` | Target the brand that is the same as the brand expressed. |
              | `asinPriceLessThan` | Target a price that is less than the price expressed. |
@@ -3885,7 +3885,7 @@ components:
             - PENDING_START_DATE
     TargetingClauseResponse:
       properties:
-        targetId: 
+        targetId:
           description: The target identifier.
           type: number
         code:
@@ -3909,11 +3909,11 @@ components:
           description: The name of the campaign.
           type: string
         tags:
-          $ref: '#/components/schemas/CampaignTags'          
+          $ref: '#/components/schemas/CampaignTags'
         state:
           $ref: '#/components/schemas/State'
         dailyBudget:
-          description: The daily budget of the campaign. 
+          description: The daily budget of the campaign.
           type: number
           format: float
           minimum: 1.00
