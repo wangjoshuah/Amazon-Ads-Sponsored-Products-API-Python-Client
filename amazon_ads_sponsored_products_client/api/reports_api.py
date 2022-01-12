@@ -40,7 +40,7 @@ class ReportsApi(object):
         self.api_client = api_client
         self.download_report_endpoint = _Endpoint(
             settings={
-                'response_type': None,
+                'response_type': (file_type,),
                 'auth': [
                     'bearer'
                 ],
@@ -95,6 +95,7 @@ class ReportsApi(object):
             },
             headers_map={
                 'accept': [
+                    'application/octet-stream',
                     'application/json'
                 ],
                 'content_type': [],
@@ -290,7 +291,7 @@ class ReportsApi(object):
             async_req (bool): execute request asynchronously
 
         Returns:
-            None
+            file_type
                 If the method is called asynchronously, returns the request
                 thread.
         """

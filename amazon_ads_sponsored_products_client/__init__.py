@@ -10,7 +10,7 @@
 """
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 # import ApiClient
 from amazon_ads_sponsored_products_client.api_client import ApiClient

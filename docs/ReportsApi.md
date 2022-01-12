@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **download_report**
-> download_report(amazon_advertising_api_client_id, amazon_advertising_api_scope, report_id)
+> file_type download_report(amazon_advertising_api_client_id, amazon_advertising_api_scope, report_id)
 
 Downloads a previously requested report identified by report ID.
 
@@ -53,7 +53,8 @@ with amazon_ads_sponsored_products_client.ApiClient(configuration) as api_client
     # example passing only required values which don't have defaults set
     try:
         # Downloads a previously requested report identified by report ID.
-        api_instance.download_report(amazon_advertising_api_client_id, amazon_advertising_api_scope, report_id)
+        api_response = api_instance.download_report(amazon_advertising_api_client_id, amazon_advertising_api_scope, report_id)
+        pprint(api_response)
     except amazon_ads_sponsored_products_client.ApiException as e:
         print("Exception when calling ReportsApi->download_report: %s\n" % e)
 ```
@@ -69,7 +70,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**file_type**
 
 ### Authorization
 
@@ -78,13 +79,14 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/octet-stream, application/json
 
 
 ### HTTP response details
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**200** | Success |  -  |
 **307** | Successful operation. |  * Location - Redirect URI with S3 file location containing report data <br>  |
 **400** | Bad request. |  -  |
 **404** | Not found - requested resource does not exist or is not visible for the authenticated user. |  -  |
